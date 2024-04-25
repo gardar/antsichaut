@@ -274,6 +274,10 @@ class ChangelogCIBase:
             new_version=new_version,
         )
 
+        # Ensure 'changes' section exists, even if empty
+        if "changes" not in data["releases"][new_version]:
+            data["releases"][new_version]["changes"] = {}
+
         leftover_changes = []
 
         skip_labels = self.group_config.pop(
